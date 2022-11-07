@@ -42,3 +42,21 @@ unset CURRENT_SCRIPT SCRIPT_PATH DOTFILE
 # Export
 
 export DOTFILES_DIR
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ -f "/opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+    __GIT_PROMPT_DIR="/opt/homebrew/opt/bash-git-prompt/share"
+    source "/opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh"
+fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/bg/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/bg/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/bg/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/bg/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc

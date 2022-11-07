@@ -1,2 +1,4 @@
 system/.custom
 system/.exports
+config/thefuck/__pycache__/
+install/Brewfile.lock.json
