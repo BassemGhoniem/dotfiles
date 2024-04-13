@@ -60,3 +60,15 @@ if [ -f '/Users/bg/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/U
 
 source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
 source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+alias ok="nvm use && npm run prettier && npm run lint && npm run build && npm run testci"
+alias k=kubectl
+alias kx=kubectx
+alias kn=kubens
+
+source /Users/bg/.docker/init-bash.sh || true # Added by Docker Desktop
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
