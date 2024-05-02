@@ -21,13 +21,13 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
-for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,path,env,exports,alias,fnm,grep,prompt,completion,fix}; do
-  [ -f "$DOTFILE" ] && . "$DOTFILE"
+for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,n,path,env,exports,alias,grep,prompt,completion,fix,zoxide}; do
+  . "$DOTFILE"
 done
 
 if is-macos; then
-  for DOTFILE in "$DOTFILES_DIR"/system/.{env,alias,function,path}.macos; do
-    [ -f "$DOTFILE" ] && . "$DOTFILE"
+  for DOTFILE in "$DOTFILES_DIR"/system/.{env,alias,function}.macos; do
+    . "$DOTFILE"
   done
 fi
 
@@ -35,12 +35,9 @@ fi
 
 eval "$(dircolors -b "$DOTFILES_DIR"/system/.dir_colors)"
 
-# Clean up
+# Wrap up
 
 unset CURRENT_SCRIPT SCRIPT_PATH DOTFILE
-
-# Export
-
 export DOTFILES_DIR
 
 export NVM_DIR="$HOME/.nvm"

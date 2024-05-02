@@ -1,3 +1,6 @@
+.DS_Store
+*.lock.json
+__pycache__
 system/.custom
 system/.exports
 config/thefuck/__pycache__/

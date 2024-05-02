@@ -2,7 +2,7 @@
 
 These are my dotfiles. Take anything you want, but at your own risk.
 
-It mainly targets macOS systems, but it works on at least Ubuntu as well.
+It mainly targets macOS systems (should install on e.g. Ubuntu as well for many tools, config and aliases etc).
 
 ## Highlights
 
@@ -12,10 +12,9 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 - Fast and colored prompt
 - Updated macOS defaults
 - Well-organized and easy to customize
-- The installation and runcom setup is [tested weekly on real Ubuntu and macOS
-  machines](https://github.com/webpro/dotfiles/actions) (Big Sur and Monterey;
-  Catalina should still be fine too) using [a GitHub
-  Action](./.github/workflows/ci.yml)
+- The installation and runcom setup is
+  [tested weekly on real Ubuntu and macOS machines](https://github.com/webpro/dotfiles/actions)
+  (Monterey/12 and Ventura/13) using [a GitHub Action](./.github/workflows/dotfiles-installation.yml)
 - Supports both Apple Silicon (M1) and Intel chips
 
 ## Packages Overview
@@ -25,8 +24,7 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 - [Node.js + npm LTS](https://nodejs.org/en/download/) (packages: [npmfile](./install/npmfile))
 - Latest Git, Bash, Python, GNU coreutils, curl, Ruby
 - [Hammerspoon](https://www.hammerspoon.org) (config: [keybindings & window management](./config/hammerspoon))
-- [Mackup](https://github.com/lra/mackup) (sync application settings)
-- `$EDITOR` (and Git editor) is [GNU nano](https://www.nano-editor.org)
+- `$EDITOR` is [GNU nano](https://www.nano-editor.org) (`$VISUAL` is `code` and Git `core.editor` is `code --wait`)
 
 ## Installation
 
@@ -45,7 +43,7 @@ The Xcode Command Line Tools includes `git` and `make` (not available on stock m
 bash -c "`curl -fsSL https://raw.githubusercontent.com/webpro/dotfiles/master/remote-install.sh`"
 ```
 
-This will clone or download, this repo to `~/.dotfiles` depending on the availability of `git`, `curl` or `wget`.
+This will clone or download this repo to `~/.dotfiles` (depending on the availability of `git`, `curl` or `wget`).
 
 1. Alternatively, clone manually into the desired location:
 
@@ -53,45 +51,61 @@ This will clone or download, this repo to `~/.dotfiles` depending on the availab
 git clone https://github.com/webpro/dotfiles.git ~/.dotfiles
 ```
 
-Use the [Makefile](./Makefile) to install everything [listed above](#package-overview), and symlink [runcom](./runcom)
-and [config](./config) (using [stow](https://www.gnu.org/software/stow/)):
+2. Use the [Makefile](./Makefile) to install the [packages listed above](#packages-overview), and symlink
+   [runcom](./runcom) and [config](./config) files (using [stow](https://www.gnu.org/software/stow/)):
 
 ```bash
 cd ~/.dotfiles
 make
 ```
 
-The installation process in the Makefile is tested on every push and every week in this
-[GitHub Action](https://github.com/webpro/dotfiles/actions).
+Running `make` with the Makefile is idempotent. The installation process in the Makefile is tested on every push and every week in this
+[GitHub Action](https://github.com/webpro/dotfiles/actions). Please file an issue in this repo if there are errors.
 
 ## Post-Installation
 
-- `dot dock` (set [Dock items](./macos/dock.sh))
-- `dot macos` (set [macOS defaults](./macos/defaults.sh))
-- Mackup
-  - Log in to Dropbox (and wait until synced)
-  - `ln -s ~/.config/mackup/.mackup.cfg ~` (until [#632](https://github.com/lra/mackup/pull/632) is fixed)
-  - `mackup restore`
+1. Set your Git credentials:
 
-## The `dotfiles` command
+```sh
+git config --global user.name "your name"
+git config --global user.email "your@email.com"
+git config --global github.user "your-github-username"
+```
 
-```bash
+2. Set macOS [Dock items](./macos/dock.sh) and [system defaults](./macos/defaults.sh):
+
+```sh
+dot dock
+dot macos
+```
+
+3. Start Hammerspoon once and set "Launch Hammerspoon at login".
+
+4. Populate this file with tokens (example: `export GITHUB_TOKEN=abc`):
+
+```sh
+touch ~/.dotfiles/system/.exports
+```
+
+## The `dot` command
+
+```
 $ dot help
 Usage: dot <command>
 
 Commands:
-    clean            Clean up caches (brew, npm, gem, rvm)
-    dock             Apply macOS Dock settings
-    edit             Open dotfiles in IDE (code) and Git GUI (stree)
-    help             This help message
-    macos            Apply macOS system defaults
-    test             Run tests
-    update           Alias for topgrade
+   clean            Clean up caches (brew, cargo, gem, pip)
+   dock             Apply macOS Dock settings
+   edit             Open dotfiles in IDE ($VISUAL) and Git GUI ($VISUAL_GIT)
+   help             This help message
+   macos            Apply macOS system defaults
+   test             Run tests
+   update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)
 ```
 
 ## Customize
 
-To customize the dotfiles to your likings, fork it and make sure to modify the locations above to your fork.
+To customize the dotfiles to your likings, fork it and [be the king of your castle!](https://www.webpro.nl/articles/getting-started-with-dotfiles)
 
 ## Credits
 
